@@ -1,7 +1,5 @@
 
-
-from feature1 import X_PCA, y
-
+import numpy as np
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score,precision_score, recall_score, f1_score
@@ -63,7 +61,7 @@ def SVM_model(X_train, y_train, X_test, y_test, kernel_type, rand_state):
             - f1 (float): F1 score of the SVM model on the test set.
             - y_pred (np.ndarray): Predicted labels for the test set.
     """
-    # Initialize the SVM model with specified kernel and random state
+# Initialize the SVM model with specified kernel and random state
     svm_model = SVC(kernel=kernel_type, random_state=rand_state)
     
     # Train the model
@@ -85,5 +83,9 @@ def SVM_model(X_train, y_train, X_test, y_test, kernel_type, rand_state):
     print("SVM Model F1 Score:", f1)
     
     return accuracy, precision, recall, f1, y_pred
+
+
+
+
 
 

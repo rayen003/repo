@@ -1,0 +1,7 @@
+# License 
+
+
+This software is developed as part of an assignment for a Software Development for Business course.
+
+
+

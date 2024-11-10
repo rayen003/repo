@@ -1,0 +1,46 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+
+def load_data(file_path):
+    """Load the data from a CSV file."""
+    return pd.read_csv(file_path)
+
+def separate_data_by_diagnosis(data):
+    """Separate data into malignant and benign based on diagnosis."""
+    malignant = data[data['diagnosis'] == 'M']
+    benign = data[data['diagnosis'] == 'B']
+    return malignant, benign
+
+def calculate_statistics(malignant, benign, features):
+    """Calculate Mean, Median, and Mode for each feature."""
+    analysis = {}
+    for feature in features:
+        analysis[feature] = {
+            'Malignant': {
+                'Mean': malignant[feature].mean(),
+                'Median': malignant[feature].median(),
+                'Mode': malignant[feature].mode().iloc[0] if not malignant[feature].mode().empty else None
+            },
+            'Benign': {
+                'Mean': benign[feature].mean(),
+                'Median': benign[feature].median(),
+                'Mode': benign[feature].mode().iloc[0] if not benign[feature].mode().empty else None
+            }
+        }
+    return analysis
+
+def plot_data(malignant, benign):
+    """Plot the data."""
+    plt.figure(figsize=(10, 6))
+    sns.histplot(malignant['radius_mean'], color='red', label='Malignant', kde=True, stat="density", bins=20)
+    sns.histplot(benign['radius_mean'], color='blue', label='Benign', kde=True, stat="density", bins=20)
+    plt.title('Distribution of Radius Mean by Diagnosis Type')
+    plt.xlabel('Radius Mean')
+    plt.ylabel('Density')
+    plt.legend()
+    plt.show()
+
+
